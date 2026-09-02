@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Client-side log file analyzer - paste, drop, or upload logs for instant triage">
+    <title>Paste Log Lab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>📋 Paste Log Lab</h1>
+        <p class="subtitle">Client-side log triage — nothing leaves your browser</p>
+    </header>
+
+    <main>
+        <section id="input-section" class="card">
+            <h2>Load Log File</h2>
+            
+            <div id="drop-zone" class="drop-zone">
+                <p>📁 Drop a .log or .txt file here</p>
+                <p class="hint">or click to browse</p>
+                <input type="file" id="file-input" accept=".log,.txt,text/plain" aria-label="Choose log file">
+            </div>
+
+            <div class="button-group">
+                <button id="load-sample-btn" class="btn btn-secondary">Load Sample Log</button>
+                <button id="paste-btn" class="btn btn-secondary">Paste from Clipboard</button>
+            </div>
+
+            <div id="paste-area-container" style="display: none;">
+                <label for="paste-textarea">Or paste log content:</label>
+                <textarea id="paste-textarea" rows="8" placeholder="Paste your log content here..." aria-label="Paste log content"></textarea>
+                <button id="analyze-paste-btn" class="btn btn-primary">Analyze Pasted Content</button>
+            </div>
+        </section>
+
+        <section id="status-section" style="display: none;">
+            <div id="status-message" class="status-message"></div>
+        </section>
+
+        <section id="results-section" style="display: none;">
+            <div class="card">
+                <div class="results-header">
+                    <h2>Analysis Results</h2>
+                    <div class="button-group">
+                        <button id="copy-filtered-btn" class="btn btn-small">Copy Filtered Lines</button>
+                        <button id="copy-summary-btn" class="btn btn-small">Copy Summary as Markdown</button>
+                        <button id="clear-btn" class="btn btn-small btn-secondary">Clear</button>
+                    </div>
+                </div>
+
+                <div id="summary-container" class="summary-container">
+                    <h3>Summary</h3>
+                    <div id="summary-stats" class="summary-stats"></div>
+                    <div id="level-histogram" class="histogram"></div>
+                    <div id="error-codes-container" style="display: none;">
+                        <h4>Error Codes</h4>
+                        <div id="error-codes-list"></div>
+                    </div>
+                    <div id="time-histogram-container" style="display: none;">
+                        <h4>Timeline</h4>
+                        <div id="time-histogram"></div>
+                    </div>
+                </div>
+
+                <div class="filters-container">
+                    <h3>Filters</h3>
+                    <div class="filter-row">
+                        <label for="search-input">Search:</label>
+                        <input type="text" id="search-input" placeholder="Filter by text..." aria-label="Search filter">
+                    </div>
+                    <div class="filter-row">
+                        <label>Log Levels:</label>
+                        <div id="level-filters" class="chip-container"></div>
+                    </div>
+                    <div class="filter-row" id="logger-filter-row" style="display: none;">
+                        <label>Loggers:</label>
+                        <div id="logger-filters" class="chip-container"></div>
+                    </div>
+                </div>
+
+                <div id="log-lines-container">
+                    <h3>Log Lines <span id="line-count"></span></h3>
+                    <div id="log-lines" class="log-lines"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built by <a href="https://github.com/evan-thedev" target="_blank" rel="noopener">Evan Parrott</a> | 
+        <a href="https://github.com/evan-thedev/paste-log-lab" target="_blank" rel="noopener">View on GitHub</a> | 
+        Privacy: All processing happens in your browser</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
