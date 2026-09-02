@@ -1,0 +1,34 @@
+2026-09-02 08:15:23.456 INFO  [com.example.OrderService] Application startup complete
+2026-09-02 08:15:24.123 DEBUG [com.example.DatabasePool] Connection pool initialized with 10 connections
+2026-09-02 08:15:25.789 INFO  [com.example.OrderService] Processing order ORD-12345
+2026-09-02 08:15:26.234 WARN  [com.example.InventoryService] Low stock warning for item SKU-9876 (only 3 remaining)
+2026-09-02 08:15:27.567 ERROR [com.example.PaymentGateway] Payment processing failed: ERR-1001 - Gateway timeout
+    at com.example.PaymentGateway.processPayment(PaymentGateway.java:142)
+    at com.example.OrderService.finalizeOrder(OrderService.java:89)
+2026-09-02 08:15:28.890 INFO  [com.example.OrderService] Order ORD-12345 marked as pending retry
+2026-09-02 08:15:30.123 DEBUG [com.example.CacheManager] Cache hit rate: 87.3%
+2026-09-02 08:15:31.456 INFO  [com.example.UserService] User login: user@example.com from 192.168.1.100
+2026-09-02 08:15:32.789 WARN  [com.example.RateLimiter] Rate limit approaching for API key: abc123def456
+2026-09-02 08:15:34.012 ERROR [com.example.EmailService] Failed to send notification email: ERR-2003 - SMTP connection refused
+2026-09-02 08:15:35.345 INFO  [com.example.ScheduledTask] Daily backup job started
+2026-09-02 08:15:36.678 DEBUG [com.example.HttpClient] GET /api/v1/products?page=1 - 200 OK (145ms)
+2026-09-02 08:15:38.901 INFO  [com.example.OrderService] Processing order ORD-12346
+2026-09-02 08:15:40.234 FATAL [com.example.DatabasePool] Database connection lost - unable to reconnect: ERR-5001
+    at com.example.DatabasePool.getConnection(DatabasePool.java:78)
+    at com.example.OrderService.loadOrder(OrderService.java:45)
+    at com.example.OrderService.processOrder(OrderService.java:67)
+2026-09-02 08:15:41.567 ERROR [com.example.OrderService] Order processing aborted for ORD-12346
+2026-09-02 08:15:42.890 WARN  [com.example.HealthCheck] Database health check failed (3 consecutive failures)
+2026-09-02 08:15:44.123 INFO  [com.example.DatabasePool] Attempting database reconnection (attempt 1 of 5)
+2026-09-02 08:15:45.456 INFO  [com.example.DatabasePool] Database connection restored
+2026-09-02 08:15:46.789 INFO  [com.example.OrderService] Resuming order processing
+2026-09-02 08:15:48.012 DEBUG [com.example.MetricsCollector] CPU usage: 45%, Memory: 2.3GB/8GB
+2026-09-02 08:15:49.345 INFO  [com.example.OrderService] Processing order ORD-12347
+2026-09-02 08:15:50.678 INFO  [com.example.OrderService] Order ORD-12347 completed successfully
+2026-09-02 08:15:52.901 WARN  [com.example.SecurityAudit] Unusual login pattern detected for IP 203.0.113.45
+2026-09-02 08:15:54.234 DEBUG [com.example.SessionManager] Active sessions: 142, Peak today: 287
+2026-09-02 08:15:55.567 INFO  [com.example.UserService] User logout: user@example.com (session duration: 3h 24m)
+2026-09-02 08:15:57.890 ERROR [com.example.ThirdPartyAPI] API request failed: ERR-3007 - Rate limit exceeded (429)
+2026-09-02 08:15:59.123 INFO  [com.example.RetryHandler] Scheduling retry for failed API request in 60 seconds
+2026-09-02 08:16:00.456 DEBUG [com.example.CacheManager] Evicted 15 expired cache entries
+2026-09-02 08:16:02.789 INFO  [com.example.ScheduledTask] Daily backup job completed successfully (duration: 27s)

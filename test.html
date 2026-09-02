@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paste Log Lab - Manual Tests</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        h1 { color: #2563eb; }
+        h2 { 
+            color: #475569;
+            margin-top: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        .test-case {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .test-case h3 {
+            margin-top: 0;
+            color: #1e293b;
+        }
+        .expected {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        .steps {
+            list-style: decimal;
+            margin-left: 1.5rem;
+        }
+        .steps li {
+            margin: 0.5rem 0;
+        }
+        code {
+            background: #e2e8f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .status.pass { background: #d1fae5; color: #065f46; }
+        .status.fail { background: #fee2e2; color: #991b1b; }
+        .status.pending { background: #fef3c7; color: #92400e; }
+    </style>
+</head>
+<body>
+    <h1>📋 Paste Log Lab - Manual Test Suite</h1>
+    <p><strong>Purpose:</strong> Verify core functionality of Paste Log Lab before deployment.</p>
+    <p><a href="index.html">← Back to Paste Log Lab</a></p>
+
+    <h2>Setup</h2>
+    <p>Open <a href="index.html" target="_blank">index.html</a> in a new tab to perform these tests.</p>
+
+    <h2>Test Cases</h2>
+
+    <div class="test-case">
+        <h3>Test 1: Load Sample Log</h3>
+        <ol class="steps">
+            <li>Click the "Load Sample Log" button</li>
+            <li>Wait for the log to load</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Success message appears: "Successfully loaded sample.log (30 lines)"</li>
+                <li>Results section becomes visible</li>
+                <li>Summary shows 30 total lines</li>
+                <li>Level histogram shows DEBUG, INFO, WARN, ERROR, FATAL counts</li>
+                <li>Error codes section shows ERR-1001, ERR-2003, ERR-3007, ERR-5001</li>
+                <li>Timeline histogram is visible</li>
+                <li>All 30 log lines are displayed</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 2: Filter by Log Level</h3>
+        <ol class="steps">
+            <li>Load the sample log (Test 1)</li>
+            <li>Click on the ERROR chip to deselect it</li>
+            <li>Observe the filtered results</li>
+            <li>Click ERROR again to reselect it</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>When ERROR is deselected, error log lines disappear</li>
+                <li>Line count updates to show fewer lines</li>
+                <li>ERROR chip becomes outlined (not filled)</li>
+                <li>When ERROR is reselected, error lines reappear</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 3: Search Filter</h3>
+        <ol class="steps">
+            <li>Load the sample log (Test 1)</li>
+            <li>Type "order" in the search box</li>
+            <li>Observe filtered results</li>
+            <li>Clear the search box</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Only lines containing "order" (case-insensitive) are shown</li>
+                <li>Line count shows something like "(8 of 30)"</li>
+                <li>Lines include OrderService entries</li>
+                <li>Clearing search shows all lines again</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 4: Copy Filtered Lines</h3>
+        <ol class="steps">
+            <li>Load the sample log (Test 1)</li>
+            <li>Filter to show only ERROR level</li>
+            <li>Click "Copy Filtered Lines" button</li>
+            <li>Paste into a text editor</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Success message: "Copied X lines to clipboard"</li>
+                <li>Pasted content contains only ERROR lines</li>
+                <li>Lines are plain text (no HTML formatting)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 5: Copy Summary as Markdown</h3>
+        <ol class="steps">
+            <li>Load the sample log (Test 1)</li>
+            <li>Click "Copy Summary as Markdown" button</li>
+            <li>Paste into a text editor or Markdown viewer</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Success message: "Summary copied as Markdown"</li>
+                <li>Pasted content is formatted Markdown</li>
+                <li>Includes headings, bullet lists with log level counts and error codes</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 6: Drag and Drop File</h3>
+        <ol class="steps">
+            <li>Save the sample.log file to your computer</li>
+            <li>Drag and drop it onto the drop zone</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Drop zone highlights when file is dragged over</li>
+                <li>File loads successfully</li>
+                <li>Same results as Test 1</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 7: File Picker</h3>
+        <ol class="steps">
+            <li>Click on the drop zone (not the buttons)</li>
+            <li>File picker dialog opens</li>
+            <li>Select sample.log</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>File picker opens</li>
+                <li>File loads successfully</li>
+                <li>Same results as Test 1</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 8: Paste Content</h3>
+        <ol class="steps">
+            <li>Copy some log content from sample.log</li>
+            <li>Click "Paste from Clipboard" button</li>
+            <li>Textarea appears</li>
+            <li>Paste content into textarea</li>
+            <li>Click "Analyze Pasted Content"</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Textarea becomes visible</li>
+                <li>Pasted content is analyzed</li>
+                <li>Results appear as expected</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 9: Clear Results</h3>
+        <ol class="steps">
+            <li>Load the sample log (Test 1)</li>
+            <li>Click the "Clear" button</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Results section disappears</li>
+                <li>Status message: "Results cleared"</li>
+                <li>Page returns to initial state</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 10: Empty File Handling</h3>
+        <ol class="steps">
+            <li>Click "Paste from Clipboard"</li>
+            <li>Leave textarea empty</li>
+            <li>Click "Analyze Pasted Content"</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Error message: "Please paste some log content first"</li>
+                <li>No results shown</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 11: Large File Warning</h3>
+        <ol class="steps">
+            <li>Create a .log file larger than 5MB (copy sample.log content many times)</li>
+            <li>Upload the large file</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Warning message appears mentioning file size</li>
+                <li>File still processes (if under 50MB)</li>
+                <li>Results appear correctly</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 12: Visual Elements</h3>
+        <ol class="steps">
+            <li>Load the sample log</li>
+            <li>Inspect visual elements</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Level histogram bars are color-coded (purple, blue, orange, red, dark red)</li>
+                <li>Log lines have syntax highlighting (timestamps, levels, loggers, error codes)</li>
+                <li>Chips have appropriate colors and hover effects</li>
+                <li>Layout is responsive and clean</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 13: Accessibility</h3>
+        <ol class="steps">
+            <li>Tab through the interface</li>
+            <li>Check screen reader labels (inspect aria-label attributes)</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>All interactive elements are keyboard accessible</li>
+                <li>File input has aria-label</li>
+                <li>Search input has aria-label</li>
+                <li>Tab order is logical</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>Test 14: Mobile Responsiveness</h3>
+        <ol class="steps">
+            <li>Resize browser window to mobile size (or use device emulation)</li>
+            <li>Load sample log</li>
+            <li>Test all features</li>
+        </ol>
+        <div class="expected">
+            <strong>Expected:</strong>
+            <ul>
+                <li>Layout adapts to smaller screens</li>
+                <li>Buttons stack vertically</li>
+                <li>Text remains readable</li>
+                <li>All features work</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Test Results Template</h2>
+    <p>Copy this template to track your test results:</p>
+    <pre style="background: #f8fafc; padding: 1rem; border-radius: 6px; overflow-x: auto;">
+# Paste Log Lab - Test Results
+
+**Date:** [DATE]
+**Browser:** [BROWSER NAME & VERSION]
+**Tester:** [YOUR NAME]
+
+| Test # | Test Name | Status | Notes |
+|--------|-----------|--------|-------|
+| 1 | Load Sample Log | ⬜ Pass / ❌ Fail | |
+| 2 | Filter by Log Level | ⬜ Pass / ❌ Fail | |
+| 3 | Search Filter | ⬜ Pass / ❌ Fail | |
+| 4 | Copy Filtered Lines | ⬜ Pass / ❌ Fail | |
+| 5 | Copy Summary as Markdown | ⬜ Pass / ❌ Fail | |
+| 6 | Drag and Drop File | ⬜ Pass / ❌ Fail | |
+| 7 | File Picker | ⬜ Pass / ❌ Fail | |
+| 8 | Paste Content | ⬜ Pass / ❌ Fail | |
+| 9 | Clear Results | ⬜ Pass / ❌ Fail | |
+| 10 | Empty File Handling | ⬜ Pass / ❌ Fail | |
+| 11 | Large File Warning | ⬜ Pass / ❌ Fail | |
+| 12 | Visual Elements | ⬜ Pass / ❌ Fail | |
+| 13 | Accessibility | ⬜ Pass / ❌ Fail | |
+| 14 | Mobile Responsiveness | ⬜ Pass / ❌ Fail | |
+
+**Overall Result:** ⬜ Pass / ❌ Fail
+
+**Additional Notes:**
+[Any other observations or issues]
+    </pre>
+
+    <h2>Automated Checks</h2>
+    <p>Quick validation checks you can run in the browser console:</p>
+    <pre style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto;">
+// Check if all required files exist
+fetch('sample.log').then(r => console.log('sample.log:', r.ok ? '✓' : '✗'));
+fetch('styles.css').then(r => console.log('styles.css:', r.ok ? '✓' : '✗'));
+fetch('app.js').then(r => console.log('app.js:', r.ok ? '✓' : '✗'));
+
+// Check if LogAnalyzer is initialized
+console.log('LogAnalyzer instance:', window.LogAnalyzer ? '✓' : '✗');
+    </pre>
+
+    <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b; text-align: center;">
+        <p>Paste Log Lab - Manual Test Suite | <a href="https://github.com/evan-thedev/paste-log-lab">GitHub</a></p>
+    </footer>
+</body>
+</html>
